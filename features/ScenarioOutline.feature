@@ -8,12 +8,12 @@ Scenario Outline: Searching for game
   Then  I click on search button
   And   I type "<game name>"
   Then  I click on search button
-  And   I scroll to "MOTO GP 19"
+  And   I scroll until "MOTO GP 19" is in view
   Then  I am on "plp" page
   And   I click on "MOTO GP 19"
   Then  I should be taken to "MotoGP" screen
 
   Examples:
-    | search | search keyword | game name | 
-    |  game  | XBOX | XBox one games |
+    | search | search keyword | game name      | 
+    |  game  |    XBOX        | XBox one games |
   

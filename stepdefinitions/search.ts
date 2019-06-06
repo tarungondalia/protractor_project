@@ -9,6 +9,5 @@ When(/^I type "(.*?)"$/, async (text) => {
 });
 
 When(/^I click on search button$/, async () => {
-    // await browser.actions().sendKeys(protractor.Key.ENTER).perform();
     await search.searchButton.click();
 });

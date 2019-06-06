@@ -88,22 +88,31 @@ const expect = chai.expect;
 
 const search: SearchPageObject = new SearchPageObject();
 
-Given(/^I am on google page$/, async () => {
-    await expect(browser.getTitle()).to.eventually.equal("Google");
-});
+Given(/^I am on "(.*?)" page$/, async (text) => {
+    if (text === "game") {
+        await expect(browser.getTitle()).to.eventually.equal("GAME | Gaming Specialist For Consoles, Games & Accessories!");
+    } else if (text === "plp") {
+        await expect(browser.getTitle()).to.eventually.equal("GAME - Destination Xbox One | GAME");
+    } else if (text === "pdp") {
+        var title = browser.getTitle(); 
+        await expect(browser.getTitle()).to.eventually.equal("MotoGP 19");
+        console.log('Title: ' + title );
+        } 
+    });
 ```
 
 #### Writing Page Objects
 ```
 import { $ } from "protractor";
 
-export class SearchPageObject {
-    public searchTextBox: any;
-    public searchButton: any;
+xport class SearchPageObject {
+    public searchTextBox: ElementFinder;
+    public searchButton: ElementFinder;
+    public logo: ElementFinder;
 
     constructor() {
-        this.searchTextBox = $("#lst-ib");
-        this.searchButton = $("input[value='Google Search']");
+        this.searchTextBox = $("#search");
+        this.searchButton = $("#searchButton");
     }
 }
 ```
@@ -126,7 +135,7 @@ cucumberOpts: {
     format: "json:./reports/json/cucumber_report.json",
     require: ["../../stepdefinitions/*.ts", "../../support/*.ts"],
     strict: true,
-    tags: "@TypeScriptScenario or @CucumberScenario or @ProtractorScenario",
+    tags: "@OutlineScenario",
 },
 ```
 #### HTML Reports
